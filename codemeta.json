@@ -1,0 +1,36 @@
+{
+  "@context": "https://codemeta.github.io/terms/",
+  "@type": "SoftwareSourceCode",
+  "name": "verAC",
+  "description": "Herramienta para la verificación técnica inicial y la organización de archivos .bin de acelerometría Matrix de muñeca y muslo.",
+  "softwareVersion": "3.10",
+  "codeRepository": "https://github.com/VeroCabanas/verAC",
+  "issueTracker": "https://github.com/VeroCabanas/verAC/issues",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "programmingLanguage": ["R", "Windows Batch"],
+  "operatingSystem": "Windows 10 or later, 64-bit",
+  "applicationCategory": "Scientific software",
+  "keywords": [
+    "accelerometry",
+    "Matrix accelerometer",
+    "quality control",
+    "physical activity",
+    "epidemiology"
+  ],
+  "author": {
+    "@type": "Person",
+    "givenName": "Verónica",
+    "familyName": "Cabanas Sánchez",
+    "id": "https://orcid.org/0000-0003-1235-3535",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Universidad Autónoma de Madrid"
+    }
+  },
+  "softwareRequirements": [
+    "R 4.6.1",
+    "GGIRread 1.0.8",
+    "data.table >= 1.17.0",
+    "openxlsx >= 4.2.8"
+  ]
+}

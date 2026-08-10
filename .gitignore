@@ -1,0 +1,40 @@
+# Datos de entrada y resultados: nunca deben entrar en Git
+archivos bin/
+archivos bin procesados/
+archivos csv/
+Excel de resultados del procesado/
+Resultados/
+*.bin
+*.BIN
+*.RData
+*.rds
+*.csv
+*.xlsx
+*.xls
+*.html
+*.pdf
+
+# Entorno autónomo y binarios de terceros
+scripts/R/
+scripts/paquetesR/
+*.exe
+*.zip
+*.7z
+*.tar.gz
+
+# Archivos locales o generados
+*.lnk
+.Rhistory
+.RData
+.Rproj.user/
+*.log
+*.tmp
+~$*
+
+# Se permiten explícitamente los manifiestos CSV versionados
+!dependency-manifest.csv
+
+# Únicos registros autorizados para la autocomprobación pública
+!scripts/arch_prueba/
+!scripts/arch_prueba/MD ACEMI-prueba.BIN
+!scripts/arch_prueba/MD ACEMS-prueba.BIN
