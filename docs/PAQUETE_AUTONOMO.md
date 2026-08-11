@@ -25,7 +25,7 @@ verAC/
 
 - Evita versionar miles de archivos binarios y un entorno de cientos de megabytes.
 - Impide que los datos reales entren accidentalmente en el historial.
-- Permite publicar el paquete autónomo como activo versionado de una *release*.
+- Permite conservar el paquete autónomo como distribución institucional versionada sin cargar varios gigabytes en el repositorio público.
 - Facilita acompañar cada distribución con manifiestos, sumas de comprobación, licencias y fuentes correspondientes.
 
 ## Verificaciones antes de una release
