@@ -1797,9 +1797,9 @@ get_paquetes_dir <- function() {
 # Funcion principal de instalacion/carga local de paquetes
 # -----------------------------------------------------------------------------
 setup_packages_local <- function() {
-  # NOTA: La INSTALACIÓN de paquetes la realiza 'Instalador_verAC.bat' (una vez, por TI).
-  # Aquí, el procesador SOLO VERIFICA que el entorno está disponible y carga los paquetes.
-  # Si falta algo, NO intenta instalar: indica ejecutar el instalador y sale con código 2.
+  # La instalación de paquetes se realiza previamente con
+  # scripts/instalar_dependencias.R o con Instalador_verAC.bat en la copia autónoma.
+  # Aquí, el procesador solo verifica que el entorno está disponible y carga los paquetes.
   message("🔍 Verificando entorno (paquetes ya instalados por el instalador)...")
 
   core_min <- list("data.table" = "1.17.0", "openxlsx" = "4.2.8",
@@ -1816,15 +1816,15 @@ setup_packages_local <- function() {
   if (length(faltan) > 0) {
     message("❌ Faltan paquetes imprescindibles o con versión insuficiente: ",
             paste(faltan, collapse = ", "))
-    message("   El entorno no está completo. Pida a su servicio de informática que ejecute")
-    message("   'Instalador_verAC.bat' una vez para instalar R y los paquetes. Después, reintente.")
+    message("   El entorno no está completo. Ejecute scripts/instalar_dependencias.R")
+    message("   o, en una copia autónoma, Instalador_verAC.bat. Después, reintente.")
     quit(save = "no", status = 2)
   }
 
   message("🔄 Cargando paquetes...")
   for (pkg in names(core_min)) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
-      message("❌ No se pudo cargar el paquete ", pkg, ". Ejecute 'Instalador_verAC.bat'.")
+      message("❌ No se pudo cargar el paquete ", pkg, ". Reinstale las dependencias.")
       quit(save = "no", status = 2)
     }
   }
@@ -1841,7 +1841,7 @@ setup_packages_local <- function() {
       !is.function(tryCatch(GGIRread::readParmayMatrix, error = function(e) NULL))) {
     message("❌ ERROR CRÍTICO: la función 'readParmayMatrix' de GGIRread no está disponible.")
     message("   Esto indica un problema con GGIRread o sus dependencias, NO con los archivos .bin.")
-    message("   Ejecute 'Instalador_verAC.bat' para reinstalar el entorno.")
+    message("   Reinstale las dependencias o reconstruya el entorno autónomo.")
     quit(save = "no", status = 2)
   }
 }

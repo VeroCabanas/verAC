@@ -16,6 +16,11 @@ set "SCRIPT_PATH=%SCRIPTS_DIR%%SCRIPT_NAME%"
 set "R_HOME=%SCRIPTS_DIR%R\R-%R_VERSION%"
 set "R_LOCAL_RSCRIPT=%R_HOME%\bin\x64\Rscript.exe"
 if not exist "%R_LOCAL_RSCRIPT%" set "R_LOCAL_RSCRIPT=%R_HOME%\bin\Rscript.exe"
+if exist "%R_LOCAL_RSCRIPT%" (
+    set "R_RUNNER=%R_LOCAL_RSCRIPT%"
+) else (
+    for /f "delims=" %%I in ('where Rscript.exe 2^>nul') do if not defined R_RUNNER set "R_RUNNER=%%I"
+)
 
 echo(
 echo ==================================================================
@@ -31,18 +36,19 @@ if /I not "%PROCESSOR_ARCHITECTURE%"=="AMD64" if not defined PROCESSOR_ARCHITEW6
     goto :fin
 )
 
-if not exist "%R_LOCAL_RSCRIPT%" (
+if not defined R_RUNNER (
     echo ================================================================================
     echo  ATENCION: el entorno de verAC todavia no esta instalado en este equipo.
     echo ================================================================================
     echo(
-    echo  No se ha encontrado R en la carpeta del programa, asi que verAC no puede
-    echo  procesar archivos todavia.
+    echo  No se ha encontrado R en la carpeta del programa ni en el sistema, asi que
+    echo  verAC no puede procesar archivos todavia.
     echo(
     echo  QUE HACER:
     echo(
-    echo   1. Ejecute primero 'Instalador_verAC.bat' con un solo clic y espere a que
-    echo      termine. Despues, vuelva a ejecutar 'verAC_v3.10.bat'.
+    echo   1. Instale R 4.4 o posterior y ejecute
+    echo      'Rscript scripts\instalar_dependencias.R' con conexion a Internet;
+    echo      o prepare el paquete autonomo y ejecute 'Instalador_verAC.bat'.
     echo(
     echo   2. Si el problema continua, ejecute 'Instalador_verAC.bat' desde una cuenta
     echo      con permisos de administrador, y compruebe que el antivirus o el cortafuegos
@@ -55,7 +61,8 @@ if not exist "%R_LOCAL_RSCRIPT%" (
     echo ================================================================================
     goto :fin
 )
-echo Usando R propio de verAC: %R_HOME%
+if /I "%R_RUNNER%"=="%R_LOCAL_RSCRIPT%" echo Usando R propio de verAC: %R_HOME%
+if /I not "%R_RUNNER%"=="%R_LOCAL_RSCRIPT%" echo Usando R del sistema: %R_RUNNER%
 
 if not exist "%SCRIPT_PATH%" (
     echo ERROR: No se encuentra el script principal:
@@ -69,7 +76,7 @@ echo INICIANDO PROCESAMIENTO...
 echo Hora de inicio: %date% %time%
 echo ================================================================================
 pushd "%BASE_DIR%"
-"%R_LOCAL_RSCRIPT%" "%SCRIPT_PATH%"
+"%R_RUNNER%" "%SCRIPT_PATH%"
 set "EXITCODE=!ERRORLEVEL!"
 popd
 
@@ -88,7 +95,7 @@ if "!EXITCODE!"=="1" (
     echo Codigo 1: No se encontraron archivos .bin en 'archivos bin'.
 ) else if "!EXITCODE!"=="2" (
     echo Codigo 2: Problema con paquetes/entorno R.
-    echo    Pida a informatica que ejecute 'Instalador_verAC.bat' de nuevo.
+    echo    Ejecute 'Rscript scripts\instalar_dependencias.R' o reinstale el entorno autonomo.
 ) else if "!EXITCODE!"=="3" (
     echo Codigo 3: Archivo abierto que debe sobrescribirse.
     echo    Cierre el Excel de resultados y los informes HTML/PDF y reejecute.

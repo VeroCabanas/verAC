@@ -8,8 +8,7 @@
 #  CÓMO USARLO (una sola vez, en un equipo CON internet):
 #   1. Este equipo debe tener el MISMO R que usa verAC (R 4.6.1).
 #   2. Ejecutarlo con ese R. Por ejemplo, desde cmd:
-#        "E:\IMPaCT_2026\verAC\scripts\R\R-4.6.1\bin\x64\Rscript.exe" ^
-#           "E:\IMPaCT_2026\verAC\scripts\descargar_paquetes_verAC.R"
+# Ejecute este script con el R que vaya a utilizar para reconstruir el paquete autónomo.
 #   3. Al terminar, la carpeta 'paquetesR' contendra todos los .zip necesarios.
 # =============================================================================
 
