@@ -12,11 +12,12 @@ La aplicación utiliza R y [`GGIRread`](https://cran.r-project.org/package=GGIRr
 - un Excel individual y un Excel global de control;
 - una estructura ordenada por código de participante.
 
-## Dos formas de distribución
+## Dos formas de instalación
 
 Este repositorio contiene el **código fuente, los lanzadores, la documentación y los metadatos**. No incorpora el entorno completo de R, los paquetes binarios ni datos de participantes.
 
-La futura *release* incluirá, como archivo independiente, un **paquete autónomo para Windows** preparado para funcionar sin conexión a Internet y, en la mayoría de los equipos, sin permisos de administración. Mantener ese paquete fuera del historial de Git hace que el repositorio sea ligero y permite documentar correctamente los componentes de terceros.
+- **Instalación con R del sistema:** permite utilizar la versión pública del repositorio. Requiere conexión a Internet durante la instalación inicial de dependencias.
+- **Paquete autónomo institucional:** puede reconstruirse para equipos sin Internet o sin permisos de administración. No se distribuye públicamente porque el entorno completo supera varios gigabytes e incorpora componentes binarios de terceros que deben gestionarse por separado.
 
 ## Requisitos
 
@@ -24,6 +25,15 @@ La futura *release* incluirá, como archivo independiente, un **paquete autónom
 - Para el paquete autónomo: Windows 10, Windows Server 2016 o posterior. R 4.6.1 requiere UCRT.
 - Archivos Matrix/Parmay `.bin` compatibles con `GGIRread`.
 - Nombres con `ACEMS` para muñeca y `ACEMI` para muslo cuando se quiera identificar automáticamente la posición.
+
+## Instalación rápida con R del sistema
+
+1. Instale R 4.4 o posterior para Windows de 64 bits.
+2. Descargue o clone el repositorio.
+3. Ejecute `Rscript scripts/instalar_dependencias.R` con conexión a Internet.
+4. Copie los `.bin` en `archivos bin/` y ejecute `scripts/verAC_v3.10.bat`.
+
+El lanzador utiliza primero el R portátil de `scripts/R/R-4.6.1` cuando existe y, en su defecto, busca `Rscript.exe` en el sistema. Las instrucciones completas están en [docs/INSTALACION.md](docs/INSTALACION.md).
 
 ## Uso básico
 
@@ -33,7 +43,7 @@ La futura *release* incluirá, como archivo independiente, un **paquete autónom
    - `Excel de resultados del procesado/RESULTADOS_COMPROBACION_DE_ARCHIVOS_ALL.xlsx`;
    - `archivos bin procesados/<código>/` para los informes y resultados individuales.
 
-Las instrucciones completas están en [docs/USO.md](docs/USO.md). La instalación del paquete autónomo se describe en [docs/INSTALACION.md](docs/INSTALACION.md).
+Las instrucciones completas están en [docs/USO.md](docs/USO.md). La instalación y la reconstrucción opcional del paquete autónomo se describen en [docs/INSTALACION.md](docs/INSTALACION.md).
 
 > [!IMPORTANT]
 > verAC **mueve** los `.bin` procesados desde `archivos bin` a la carpeta del participante. Cuando se reprocesa un archivo cuyo nombre ya existe y las copias de seguridad están desactivadas, el archivo de destino puede sustituirse. Antes de trabajar con datos irremplazables, conserve una copia maestra fuera de la carpeta de verAC.
@@ -52,7 +62,7 @@ No se incluyen datos reales en este repositorio. Los nombres de archivo y los re
 
 ## Código, dependencias y licencia
 
-El código propio de verAC se distribuye con licencia [MIT](LICENSE). R y los paquetes incluidos en el futuro paquete autónomo conservan sus respectivas licencias. La relación se documenta en [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) y [dependency-manifest.csv](dependency-manifest.csv).
+El código propio de verAC se distribuye con licencia [MIT](LICENSE). R y los paquetes utilizados por las copias autónomas conservan sus respectivas licencias. La relación se documenta en [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) y [dependency-manifest.csv](dependency-manifest.csv).
 
 ## Cita
 

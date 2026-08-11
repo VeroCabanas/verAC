@@ -4,6 +4,8 @@
   "name": "verAC",
   "description": "Herramienta para la verificación técnica inicial y la organización de archivos .bin de acelerometría Matrix de muñeca y muslo.",
   "softwareVersion": "3.10",
+  "dateCreated": "2026-06-01",
+  "dateModified": "2026-08-11",
   "codeRepository": "https://github.com/VeroCabanas/verAC",
   "issueTracker": "https://github.com/VeroCabanas/verAC/issues",
   "license": "https://spdx.org/licenses/MIT.html",
